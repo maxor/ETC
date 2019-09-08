@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ETC.Data;
 
 namespace ETC
 {
@@ -14,7 +15,15 @@ namespace ETC
     {
         public Form1()
         {
+            //AddDatatoDB dt = new AddDatatoDB();
+            //dt.FillDB();
             InitializeComponent();
+        }
+
+        private void btnFill_Click(object sender, EventArgs e)
+        {
+            DataPresenter presenter = new DataPresenter();
+            presenter.FillData(this.trVBase);
         }
     }
 }

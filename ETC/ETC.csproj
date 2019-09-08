@@ -56,8 +56,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataPresenter.cs" />
+    <Compile Include="Data\AddDatatoDB.cs" />
     <Compile Include="Data\Catalog.cs" />
     <Compile Include="Data\Catalog_aggregate.cs" />
+    <Compile Include="Data\Catalog_level.cs" />
     <Compile Include="Data\Catalog_model.cs" />
     <Compile Include="Data\SparesContext.cs" />
     <Compile Include="Form1.cs">
@@ -68,6 +71,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

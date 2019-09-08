@@ -62,6 +62,7 @@
     <Compile Include="Data\Catalog_aggregate.cs" />
     <Compile Include="Data\Catalog_level.cs" />
     <Compile Include="Data\Catalog_model.cs" />
+    <Compile Include="Data\DataFunction.cs" />
     <Compile Include="Data\SparesContext.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

@@ -1,63 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ETC.Data;
 using System.Windows.Forms;
+using System.Threading.Tasks;
+using System;
 
 namespace ETC
 {
     public class DataPresenter
     {
-        List<Catalog_level> level;
-        List<Catalog_level> GetLevelData()
+        DataFunction dt = new DataFunction();
+        public DataPresenter()
         {
-            try
-            {
-                using (var context = new SparesContext())
-                {
-                    level = (from c in context.Catalog_levels
-                             select c).ToList();
-                }
-                return level;
-            }
-            catch (Exception e)
-            {
-
-                throw;
-            }
+            dt.GetLevelData();
         }
 
-        public void FillData(TreeView trVBase)
+        public TreeNode[] FillData()
         {
-            List<Catalog_level> data = GetLevelData();
-            List<Catalog_level> zeroLevel = (from d in data
+            List<Catalog_level> zeroLevel = (from d in dt.level
                                              where d.Parent_id == 0
                                              select d).ToList();
+            TreeNode[] trn = new TreeNode[zeroLevel.Count];
             int i = 0;
             foreach (var zl in zeroLevel)
             {
-                trVBase.Nodes.Add(new TreeNode(zl.Name));
-                List<Catalog_level> firstParent = (from d in data
+                trn[i] = new TreeNode(zl.Name);
+                List<Catalog_level> firstParent = (from d in dt.level
                                                    where d.Parent_id == zl.Id
                                                    select d).ToList();
                 int j = 0;
                 foreach (var child in firstParent)
                 {
-                    
-                    trVBase.Nodes[i].Nodes.Add(child.Name);
-                    List<string> secondParent = (from d in data
-                                                where d.Parent_id == child.Id
+
+                    trn[i].Nodes.Add(child.Name);
+                    List<string> secondParent = (from d in dt.level
+                                                 where d.Parent_id == child.Id
                                                 select d.Name).ToList();
                     foreach (var second in secondParent)
                     {
-                        trVBase.Nodes[i].Nodes[j].Nodes.Add(second);
+                        trn[i].Nodes[j].Nodes.Add(second);
                     }
                     j++;
                 }
                 i++;
             }
+            GC.Collect();
+            return trn;
         }
 
 
